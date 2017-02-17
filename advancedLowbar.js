@@ -35,4 +35,23 @@ _.indexOf = function(arr, val, isSorted) {
   }
 };
 
+_.once = function(fun) {
+  let hasBeenUsed;
+  let res;
+
+  return function() {
+    if (!hasBeenUsed) {
+      hasBeenUsed = true;
+      res = fun.apply(this, arguments);
+    }
+    
+    return res;
+  };
+};
+
+_.memoize = function() {
+
+};
+
+
 module.exports = _;
