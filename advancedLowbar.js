@@ -51,16 +51,19 @@ _.once = function(iteratee) {
   };
 };
 
-_.memoize = function(fun) {
-  var memo = {};
+_.memoize = function(iteratee, hashFunction) {
+  const memo = {};
 
   const speedy = function() {
-    const args = JSON.stringify(arguments[0]);
+    const args = hashFunction ? 
+      hashFunction.apply(null, arguments) 
+      : 
+      JSON.stringify(arguments[0]);
     
-    if (memo[args]) {
-      return memo[args];
+    if (!memo[args]) {
+      memo[args] = iteratee.apply(null, arguments);
     }
-    memo[args] = fun.apply(null, arguments);
+
     return memo[args];
   };
 
