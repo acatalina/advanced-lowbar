@@ -37,14 +37,14 @@ _.indexOf = function(arr, val, isSorted) {
   }
 };
 
-_.once = function(fun) {
+_.once = function(iteratee) {
   let hasBeenUsed;
   let res;
 
   return function() {
     if (!hasBeenUsed) {
       hasBeenUsed = true;
-      res = fun.apply(this, arguments);
+      res = iteratee.apply(this, arguments);
     }
     
     return res;
