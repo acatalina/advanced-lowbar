@@ -78,6 +78,10 @@ _.delay = function(iteratee, wait) {
   setTimeout(() => {
     iteratee.apply(null, args);
   }, wait);
-}; 
+};
+
+_.shuffle = function(list, n) {
+
+};
 
 module.exports = _;
