@@ -72,11 +72,11 @@ _.memoize = function(iteratee, hashFunction) {
   return speedy;
 };
 
-_.delay = function(fun, wait) {
+_.delay = function(iteratee, wait) {
   const args = Array.from(arguments).slice(2);
   
-  setTimeout(function() {
-    fun.apply(null, args);
+  setTimeout(() => {
+    iteratee.apply(null, args);
   }, wait);
 }; 
 
