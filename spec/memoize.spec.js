@@ -2,12 +2,12 @@ var expect = require('chai').expect;
 var sinon = require('sinon');
 var memoize = require('../advancedLowbar').memoize;
 
-describe('memoize', function () {
-  it('is a function', function () {
+describe('memoize', function() {
+  it('is a function', function() {
     expect(memoize).to.be.a('function');
   });
   
-  it('it does what the input function does', function () {
+  it('it does what the input function does', function() {
     let iteratee = function(n) { return n * 2; };
     let tester = memoize(iteratee);
     
