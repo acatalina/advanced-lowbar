@@ -212,4 +212,8 @@ _.intersection = function() {
   return res;
 };
 
+_.difference = function() {
+  
+};
+
 module.exports = _;
