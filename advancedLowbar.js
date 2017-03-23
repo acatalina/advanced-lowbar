@@ -1,4 +1,5 @@
-var _ = {};
+const map = require('./lowbar').map;
+const _ = {};
 
 _.indexOf = function(arr, val, isSorted) {
   if (!Array.isArray(arr) || !val) return -1;
@@ -102,8 +103,13 @@ _.shuffle = function(list) {
   return res;
 };
 
-_.invoke = function() {
-
+_.invoke = function(list, methodName) {
+  let args = Array.prototype.slice.call(arguments, 2);
+  
+  return map(list, function(elem) {
+    let func = elem[methodName];
+    return func ? func.apply(elem, args) : elem[null];
+  });
 };
 
 module.exports = _;
