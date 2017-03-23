@@ -181,4 +181,8 @@ _.sortedIndex = function(list, value, iteratee) {
     return endIndex;
 };
 
+_.flatten = function() {
+
+};
+
 module.exports = _;
