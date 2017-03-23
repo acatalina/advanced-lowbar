@@ -137,4 +137,8 @@ _.sortBy = function(list, sortBy) {
   }, []);
 };
 
+_.zip = function() {
+
+};
+
 module.exports = _;
