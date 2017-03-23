@@ -138,7 +138,22 @@ _.sortBy = function(list, sortBy) {
 };
 
 _.zip = function() {
+  let args = Array.prototype.slice.call(arguments, 0);
+  let res = [];
+  
+  for (let i = 0; i < args.length; i++) {
+    if (!Array.isArray(args[i])) break;
+    
+    let newArray = [];
 
+    for (let j = 0; j < args.length; j++) {
+      newArray.push(args[j][i]);
+    }
+    
+    newArray.length > 0 ? res.push(newArray) : null;
+  }
+
+  return res;
 };
 
 module.exports = _;
