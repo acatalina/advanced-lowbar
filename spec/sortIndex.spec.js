@@ -1,7 +1,7 @@
 var expect = require('chai').expect;
 var sortedIndex = require('../advancedLowbar').sortedIndex;
 
-describe('sortIndex', function() {
+describe('sortedIndex', function() {
   it('is a function', function() {
     expect(sortedIndex).to.be.a('function');
   });
