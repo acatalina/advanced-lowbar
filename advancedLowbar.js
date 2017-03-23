@@ -102,4 +102,8 @@ _.shuffle = function(list) {
   return res;
 };
 
+_.invoke = function() {
+
+};
+
 module.exports = _;
