@@ -112,4 +112,8 @@ _.invoke = function(list, methodName) {
   });
 };
 
+_.sortBy = function(list, sortBy, context) {
+
+};
+
 module.exports = _;
