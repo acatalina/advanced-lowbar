@@ -3,7 +3,7 @@ var expect = require('chai').expect;
 const _ = require(path.join(__dirname, '..', './advancedLowbar.js'));
 var range = require('underscore').range;
 
-describe('_.indexOf', function() {
+describe('indexOf', function() {
   it('is a function', function() {
     expect(_.indexOf).to.be.a('function');
   });
