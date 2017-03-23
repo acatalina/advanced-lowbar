@@ -209,11 +209,27 @@ _.intersection = function() {
       }
     }
   }
+  
   return res;
 };
 
-_.difference = function() {
+_.difference = function(arr) {
+  let length = arr ? arr.length : 0;
+  let res = [];
   
+  for (let i = 0; i < length; i++) {
+    let elem = arr[i];
+    
+    for (let j = 1; j < arguments.length; j++) {
+      let isNotCommon = !contains(arguments[j], elem);
+      
+      if (isNotCommon) {
+        res.push(elem);
+      }
+    }
+  }
+
+  return res;
 };
 
 module.exports = _;
