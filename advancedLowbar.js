@@ -143,7 +143,7 @@ _.zip = function() {
   
   for (let i = 0; i < args.length; i++) {
     if (!Array.isArray(args[i])) break;
-    
+
     let newArray = [];
 
     for (let j = 0; j < args.length; j++) {
@@ -154,6 +154,10 @@ _.zip = function() {
   }
 
   return res;
+};
+
+_.sortIndex = function() {
+  
 };
 
 module.exports = _;
