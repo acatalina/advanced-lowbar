@@ -112,22 +112,29 @@ _.invoke = function(list, methodName) {
   });
 };
 
-_.sortBy = function(list, sortBy, context) {
-  let mapped = list.map(function(elem, i, list) {
+_.sortBy = function(list, sortBy) {
+  let args = Array.prototype.slice.call(arguments, 2);
+  let iteratee;
+
+  if (typeof sortBy === 'string') {
+    iteratee = ((elem) => {
+      return elem[sortBy];
+    });
+  } else {
+    iteratee = sortBy;
+  }
+
+  return map(list, function(elem, i, list) {
     return {
       elem: elem,
-      index: i,
-      computed: sortBy(elem, i, list)
+      computed: iteratee.call(args, elem, i, list)
     };
-  });
-  
-  mapped = mapped.sort(function(a, b) {
-    return a.computed - b.computed;
-  });
-
-  return map(mapped, function(e) {
-    return e.elem;
-  });
+  }).sort(function(a, b) {
+    return a.computed > b.computed;
+  }).reduce(function(res, e) {
+    res.push(e.elem);
+    return res;
+  }, []);
 };
 
 module.exports = _;
