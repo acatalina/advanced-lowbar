@@ -80,8 +80,26 @@ _.delay = function(iteratee, wait) {
   }, wait);
 };
 
-_.shuffle = function(list, n) {
+_.shuffle = function(list) {
+  if (!Array.isArray(list) && typeof list !== 'object') return [];
 
+  let keys = Object.keys(list);
+  let length = keys.length;
+  let res = Array(length);
+
+  function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+  }
+
+  for (let i = 0; i < length; i++) {
+    let random = getRandomInt(i);
+    if (random !== i) {
+      res[i] = res[random];
+    }
+    res[random] = list[keys[i]];
+  }
+  
+  return res;
 };
 
 module.exports = _;
