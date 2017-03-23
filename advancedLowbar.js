@@ -209,7 +209,7 @@ _.intersection = function() {
       }
     }
   }
-  
+
   return res;
 };
 
@@ -230,6 +230,10 @@ _.difference = function(arr) {
   }
 
   return res;
+};
+
+_.throttle = function() {
+
 };
 
 module.exports = _;
