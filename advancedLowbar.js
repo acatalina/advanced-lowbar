@@ -193,4 +193,8 @@ _.flatten = function(arr, shallow) {
   }, []);
 };
 
+_.intersection = function() {
+
+};
+
 module.exports = _;
