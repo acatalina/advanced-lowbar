@@ -1,4 +1,4 @@
-const {map, reduce} = require('./lowbar');
+const {map, reduce, contains} = require('./lowbar');
 const _ = {};
 
 _.indexOf = function(arr, val, isSorted) {
@@ -194,7 +194,22 @@ _.flatten = function(arr, shallow) {
 };
 
 _.intersection = function() {
-
+  let length = arguments[0] ? arguments[0].length : 0;
+  let res = [];
+  
+  for (let i = 0; i < length; i++) {
+    let elem = arguments[0][i];
+    
+    for (let j = 1; j < arguments.length; j++) {
+      let isCommon = contains(arguments[j], elem);
+      let notSeen = isCommon ? !contains(res, elem) : false; 
+      
+      if (isCommon && notSeen) {
+        res.push(elem);
+      }
+    }
+  }
+  return res;
 };
 
 module.exports = _;
