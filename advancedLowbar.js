@@ -181,8 +181,8 @@ _.sortedIndex = function(list, value, iteratee) {
     return endIndex;
 };
 
-_.flatten = function() {
-
+_.flatten = function(arr, shallow) {
+  if (!Array.isArray(arr)) return [];
 };
 
 module.exports = _;
