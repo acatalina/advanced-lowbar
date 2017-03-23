@@ -113,7 +113,21 @@ _.invoke = function(list, methodName) {
 };
 
 _.sortBy = function(list, sortBy, context) {
+  let mapped = list.map(function(elem, i, list) {
+    return {
+      elem: elem,
+      index: i,
+      computed: sortBy(elem, i, list)
+    };
+  });
+  
+  mapped = mapped.sort(function(a, b) {
+    return a.computed - b.computed;
+  });
 
+  return map(mapped, function(e) {
+    return e.elem;
+  });
 };
 
 module.exports = _;
