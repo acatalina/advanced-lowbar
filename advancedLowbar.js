@@ -1,4 +1,4 @@
-const map = require('./lowbar').map;
+const {map, reduce} = require('./lowbar');
 const _ = {};
 
 _.indexOf = function(arr, val, isSorted) {
@@ -181,8 +181,16 @@ _.sortedIndex = function(list, value, iteratee) {
     return endIndex;
 };
 
-_.flatten = function(arr, shallow) {
+_.flatten = function(arr, shallow) {  
   if (!Array.isArray(arr)) return [];
+
+  return reduce(arr, function(res, elem) {
+    if (Array.isArray(elem) && !shallow) {
+      elem = _.flatten(elem);
+    }
+    
+    return res.concat(elem);
+  }, []);
 };
 
 module.exports = _;
