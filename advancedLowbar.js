@@ -230,6 +230,7 @@ _.difference = function(arr) {
 
 _.throttle = function(iteratee, wait, options) {
   let readyToUse = true;
+  let reCalled;
   let res;
 
   return function() {
@@ -238,7 +239,13 @@ _.throttle = function(iteratee, wait, options) {
       res = iteratee.apply(this, arguments);
       setTimeout(() => {
         readyToUse = true;
+        if (reCalled) {
+          res = iteratee.apply(this, arguments);
+          reCalled = false;
+        }
       }, wait);
+    } else {
+      reCalled = true;
     }
     
     return res;
