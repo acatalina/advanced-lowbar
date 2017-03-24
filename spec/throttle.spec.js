@@ -6,4 +6,7 @@ describe('throttle', function() {
     expect(throttle).to.be.a('function');
   });
 
+  it('provides a function that can just be called again after a specific amount of time', function() {
+    
+  });
 });

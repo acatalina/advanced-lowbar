@@ -1,6 +1,21 @@
 const {map, reduce, contains} = require('./lowbar');
 const _ = {};
 
+_.getIteratee = function getIteratee(method) {
+  switch (typeof method) {
+    case 'function':
+      return method;
+    case 'string':
+      return function(elem) {
+        return elem[method];
+      };
+    default: 
+      return function(elem) {
+        return elem;
+      };
+  }
+};
+
 _.indexOf = function(arr, val, isSorted) {
   if (!Array.isArray(arr) || !val) return -1;
 
@@ -151,27 +166,17 @@ _.zip = function() {
   return res;
 };
 
-_.sortedIndex = function(list, value, iteratee) {
+_.sortedIndex = function(list, value, iteratee, context) {
     if (!Array.isArray(list)) return 0;
 
-    let args = Array.prototype.slice.call(arguments, 3);
     let prevIndex = 0;
     let endIndex = list.length;
-    let func;
-
-    if (typeof iteratee !== 'function') {
-      func = ((elem) => { 
-        if (typeof iteratee === 'string') {
-          return elem[iteratee]; 
-        }
-        return elem;
-      });
-    }
+    let func = _.getIteratee.call(context, iteratee);
 
     while (prevIndex < endIndex) {
       let midIndex = Math.floor((prevIndex + endIndex) / 2);
       
-      if (func.call(args, list[midIndex]) > func.call(args, value)) {
+      if (func(list[midIndex]) > func(value)) {
         endIndex = midIndex;
       } else {
         prevIndex = midIndex + 1;
@@ -232,8 +237,21 @@ _.difference = function(arr) {
   return res;
 };
 
-_.throttle = function() {
+_.throttle = function(iteratee, wait, options) {
+  let readyToUse = true;
+  let res;
 
+  return function() {
+    if (readyToUse) {
+      readyToUse = false;
+      res = iteratee.apply(this, arguments);
+      setTimeout(() => {
+        readyToUse = true;
+      }, wait);
+    }
+    
+    return res;
+  };
 };
 
 module.exports = _;
