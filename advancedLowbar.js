@@ -122,22 +122,13 @@ _.invoke = function(list, methodName) {
   });
 };
 
-_.sortBy = function(list, sortBy) {
-  let args = Array.prototype.slice.call(arguments, 2);
-  let iteratee;
-
-  if (typeof sortBy === 'string') {
-    iteratee = ((elem) => {
-      return elem[sortBy];
-    });
-  } else {
-    iteratee = sortBy;
-  }
+_.sortBy = function(list, sortBy, context) {
+  let iteratee = _.getIteratee(sortBy).bind(context);
 
   return map(list, function(elem, i, list) {
     return {
       elem: elem,
-      computed: iteratee.call(args, elem, i, list)
+      computed: iteratee(elem, i, list)
     };
   }).sort(function(a, b) {
     return a.computed > b.computed;
@@ -171,7 +162,7 @@ _.sortedIndex = function(list, value, iteratee, context) {
 
     let prevIndex = 0;
     let endIndex = list.length;
-    let func = _.getIteratee.call(context, iteratee);
+    let func = _.getIteratee(iteratee).bind(context);
 
     while (prevIndex < endIndex) {
       let midIndex = Math.floor((prevIndex + endIndex) / 2);
